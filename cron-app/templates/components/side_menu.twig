@@ -1,0 +1,28 @@
+{% block content %}
+<aside>
+    <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
+            <li class="active">
+                <a class="" href="{{ path('orders-list', {'warehouse_name': warehouse_name}) }}">
+                    <i class="icon_house_alt"></i>
+                    <span>Orders</span>
+                </a>
+            </li>
+            <li class="active">
+                <a class="" href="{{ path('shipment-list', {'warehouse_name': warehouse_name}) }}">
+                    <i class="icon_house_alt"></i>
+                    <span>Shipments</span>
+                </a>
+            </li>
+            <li class="active">
+                <a class="" href="{{ path('admin-panel') }}">
+                    <i class="icon_house_alt"></i>
+                    <span>Panel</span>
+                </a>
+            </li>
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+{% endblock %}

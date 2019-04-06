@@ -1,0 +1,18 @@
+{% block content %}
+<aside>
+    <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
+            {% for warehouse in warehouses %}
+                <li class="active">
+                    <a class="" href="{{ path('warehouse', {'name': warehouse.name}) }}">
+                        <i class="icon_house_alt"></i>
+                        <span>{{ warehouse.name }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+{% endblock %}

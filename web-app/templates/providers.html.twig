@@ -1,0 +1,174 @@
+{% block content %}
+{{ include(':components:wh_side_menu.twig') }}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href= {{ asset('assets/img/favicon.png">
+
+    <title>Manage Data Providers</title>
+
+    <!-- Bootstrap CSS -->
+    <link href= {{ asset('assets/css/bootstrap.min.css') }} rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href= {{ asset('assets/css/bootstrap-theme.css') }} rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href= {{ asset('assets/css/elegant-icons-style.css') }} rel="stylesheet" />
+    <link href= {{ asset('assets/css/font-awesome.min.css') }} rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href= {{ asset('assets/css/style.css') }} rel="stylesheet">
+    <link href= {{ asset('assets/css/style-responsive.css') }} rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src= {{ asset('assets/js/html5shiv.js') }}></script>
+    <script src= {{ asset('assets/js/respond.min.js') }}></script>
+    <script src= {{ asset('assets/js/lte-ie7.js') }}></script>
+    <![endif]-->
+
+    <!-- =======================================================
+      Theme Name: NiceAdmin
+      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+      Author: BootstrapMade
+      Author URL: https://bootstrapmade.com
+    ======================================================= -->
+</head>
+
+
+<body>
+<!-- container section start -->
+<section id="container" class="">
+    <!--header start-->
+
+    <header class="header dark-bg">
+        {{ include('niceAdminBootstrap/components/header.twig') }}
+    </header>
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header"><i class="fa fa fa-bars"></i>Manage providers</h3>
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                        <li><i class="fa fa-bars"></i>Manage providers</li>
+                    </ol>
+                </div>
+            </div>
+
+            <h2>Manage API Providers</h2>
+            <br>
+
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Scope</th>
+                    <th>Query URL</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                {% for provider in providers %}
+                    <tr>
+                        <td>{{ provider.name}}</td>
+                        <td id="code{{ loop.index }}">{{ provider.code}}</td>
+                        <td>{{ provider.scope }}</td>
+                        <td>{{ provider.queryURL }}</td>
+                        <td id="provider-status{{ loop.index }}">{{ provider.status }}</td>
+                        <td>
+                            <a class="btn btn-default" id = "block{{ loop.index }}" title="Bootstrap 3 themes generator">
+                                {% if provider.status == 1 %}
+                                    Block
+                                {% else %}
+                                    Unblock
+                                {% endif %}
+                            </a>
+                            <a class="btn btn-default" id = "save{{ loop.index }}" title="Bootstrap 3 themes generator">Save</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </section>
+    </section>
+    <!--main content end-->
+    <div class="text-right">
+        <div class="credits">
+            <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
+            -->
+        </div>
+    </div>
+</section>
+<!-- container section end -->
+<!-- javascripts -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min..js') }} type="text/javascript"></script>
+<script type="text/javascript">
+    $( document ).ready(function() {
+
+        $( ".btn-default" ).click(function() {
+            var id, status, code;
+            if (this.id.substring(0, 4) === "save") {
+                id = this.id.substr(4);
+                code = "#code" + id;
+                status = "#provider-status" + id;
+                var data = {
+                    "code": $(code).html(),
+                    "status": $(status).html()
+                };
+                console.log("Ajax call:");
+                console.log(data);
+                $.ajax({
+                    url:'{{ (path('ajax-provider')) }}',
+                    type: "POST",
+                    dataType: "json",
+                    data: data,
+                    async: true,
+                    success: function (data) {
+                        if (data.status === 0) {
+                            alert("Provider modified");
+                        } else {
+                            alert("Internal error occurred, please try again later");
+                        }
+                    }
+                });
+            } else if (this.id.substring(0, 5) === "block") {
+                id = this.id.substr(5);
+                status = "#provider-status" + id;
+                if ($(this).html().trim() === "Unblock") {
+                    $(status).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100)
+                        .fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+                    $(status).html(1);
+                    $(this).html("Block");
+                } else {
+                    $(status).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100)
+                        .fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+                    $(status).html(0);
+                    $(this).html("Unblock");
+                }
+            }
+        });
+    });
+</script>
+<script src= {{ asset('assets/js/jquery.js') }}></script>
+<script src= {{ asset('assets/js/bootstrap.min.js') }}></script>
+<!-- nice scroll -->
+<script src= {{ asset('assets/js/jquery.scrollTo.min.js') }}></script>
+<script src= {{ asset('assets/js/jquery.nicescroll.js") }} type="text/javascript"></script>
+<!--custome script for all page-->
+<script src= {{ asset('assets/js/scripts.js') }}></script>
+
+
+</body>
+
+{% endblock %}

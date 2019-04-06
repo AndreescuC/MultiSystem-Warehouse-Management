@@ -1,0 +1,157 @@
+{% block content %}
+    {{ include('components/plain_side_menu.twig') }}
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WH Admin">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href={{ asset('assets/img/favicon.png') }}>
+
+    <title>WH Admin</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/v4-shims.css">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href={{ asset('assets/css/bootstrap-theme.css') }} rel="stylesheet">
+    <link href={{ asset('assets/css/elegant-icons-style.css') }} rel="stylesheet" />
+    <link href={{ asset('assets/css/font-awesome.min.css') }} rel="stylesheet" />
+    <link href={{ asset('assets/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css') }} rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href={{ asset('assets/css/owl.carousel.css') }} type="text/css">
+    <link href={{ asset('assets/css/jquery-jvectormap-1.2.2.css') }} rel="stylesheet">
+    <link href={{ asset('assets/css/widgets.css') }} rel="stylesheet">
+    <link href={{ asset('assets/css/style.css') }} rel="stylesheet">
+    <link href={{ asset('assets/css/style-responsive.css') }} rel="stylesheet" />
+    <link href={{ asset('assets/css/xcharts.min.css') }} rel="stylesheet">
+    <link href={{ asset('assets/css/jquery-ui-1.10.4.min.css') }} rel="stylesheet">
+
+    <style>
+
+      .foo {
+        float: left;
+        width: 20px;
+        height: 20px;
+        margin: 5px;
+        border: 1px solid rgba(0, 0, 0, .2);
+      }
+
+      .blue {
+        background: #F7464A;
+      }
+
+      .purple {
+        background: #46BFBD;
+      }
+
+      .wine {
+        background: #4D5360;
+      }
+    </style>
+  </head>
+
+  <body>
+  <!-- container section start -->
+  <section id="container" class="">
+    <!--header start-->
+    <header class="header dark-bg">
+      {{ include('components/header.twig') }}
+    </header>
+
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-th"></i>PANEL</h3>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+              <li><i class="fa fa-th"></i>Panel</li>
+            </ol>
+          </div>
+        </div>
+        <div class="row">
+          <section class="panel">
+            <header class="panel-heading">
+              Actions
+            </header>
+            <div class="row">
+              <div class="col-lg-6">
+              <section class="panel">
+                <header class="panel-heading">
+                  Shipments
+                </header>
+                <div class="panel-body text-center">
+                  <canvas id="doughnut2" data-stats-archived="{{ stats.shipment_stats[0] }}"
+                          data-stats-under-way="{{ stats.shipment_stats[1] }}"
+                          data-stats-done="{{ stats.shipment_stats[2] }}" height="300" width="400"></canvas>
+                  <div align="left">
+                    <br><div class="foo blue"></div>Under way<br>
+                    <div class="foo purple"></div>Finished<br>
+                    <div class="foo wine"></div>Archived
+                  </div>
+                </div>
+              </section>
+            </div>
+              <div class="col-lg-6">
+                <section class="panel">
+                  <header class="panel-heading">
+                    Orders
+                  </header>
+                  <div class="panel-body text-center">
+                    <canvas id="doughnut1" data-stats-archived="{{ stats.orders_stats[0] }}"
+                            data-stats-under-way="{{ stats.orders_stats[1] }}"
+                            data-stats-done="{{ stats.orders_stats[2] }}" height="300" width="400"></canvas>
+                    <div align="left">
+                      <br><div class="foo blue"></div>In shipping<br>
+                      <div class="foo purple"></div>Shipped<br>
+                      <div class="foo wine"></div>Archived
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <button id="archive_shipments" type="button" class="btn btn-primary btn-lg btn-block">Archive Shipments</button>
+              </div>
+              <div class="col-lg-6">
+                <button id="archive_orders" type="button" class="btn btn-primary btn-lg btn-block">Archive Order Headers</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </section>
+
+    <div class="text-right">
+      <div class="credits">
+        <!--
+          All the links in the footer should remain intact.
+          You can delete the links only if you purchased the pro version.
+          Licensing information: https://bootstrapmade.com/license/
+          Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
+        -->
+      </div>
+    </div>
+  </section>
+  <script src="{{ asset('assets/js/jquery.js') }}"></script>
+  <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('assets/js/jquery.scrollTo.min.js') }}"></script>
+  <script src="{{ asset('assets/js/jquery.nicescroll.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('assets/js/scripts.js') }}"></script>
+
+
+  <script src="{{ asset('assets/js/jquery.js') }}"></script>
+  <script src="{{ asset('assets/js/jquery-1.8.3.min.js') }}"></script>
+  <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('assets/js/jquery.scrollTo.min.js') }}"></script>
+  <script src="{{ asset('assets/js/jquery.nicescroll.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('assets/assets/chart-master/Chart.js') }}"></script>
+  <script src="{{ asset('assets/js/chartjs-custom.js') }}"></script>
+  <script src="{{ asset('assets/js/scripts.js') }}"></script>
+
+  </body>
+
+
+{% endblock %}
+

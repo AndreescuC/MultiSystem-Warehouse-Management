@@ -1,0 +1,18 @@
+# docker-compose.yaml
+version: '3'
+
+services:
+  php:
+    build:
+      context: ./web-app
+      dockerfile: docker/build/php/Dockerfile
+    ports:
+      - "8001:80"
+  cron:
+    build:
+      context: ./cron-app
+      dockerfile: docker/build/cron/Dockerfile
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: docker/build/mysql/Dockerfile
